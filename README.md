@@ -57,6 +57,7 @@ https://riptutorial.com/pandas/example/21739/get-the-first-last-n-rows-of-a-data
 * [Python.org](https://www.python.org/)
 * [Pandas.pydata.org](https://pandas.pydata.org/)
 * [Indexing and Selecting Data](https://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-integer) in a pandas DataFrame
+* Using [pandas.DataFrame.iloc](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.iloc.html)
 
 ### Credits
 Style of README.md was inspired by [AudioKit](https://github.com/AudioKit/AudioKit)
