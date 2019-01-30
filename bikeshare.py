@@ -21,8 +21,8 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'washington': 'washington.csv' }
 
 """ Two global lists with months and days needed to be sccessed by the functions """
-months_long = ['January', 'February', 'March', 'April', 'May', 'June']
-days_long = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+months_l = ['January', 'February', 'March', 'April', 'May', 'June']
+days_l = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 
 def get_filters():
@@ -41,12 +41,12 @@ def get_filters():
 
     # different lists for filtering. "Short forms" of the lists take starting strings of each element in the lists. Short forms allow faster user inputself.
     # "Short form" input as well as "long form" input of names/data are allowed
-    cities_long = ['Chicago', 'New York City', 'Washington']
-    cities_short = [item[0].lower() for item in cities_long]
-    months_short = [item[0:3].lower() for item in months_long]
-    days_short = [item[0:2].lower() for item in days_long]
-    type_of_filter_long = ['month', 'day', 'not at all']
-    type_of_filter_short = [item[0].lower() for item in type_of_filter_long]
+    cities_l = ['Chicago', 'New York City', 'Washington']
+    cities_s = [item[0].lower() for item in cities_l]
+    months_s = [item[0:3].lower() for item in months_l]
+    days_s = [item[0:2].lower() for item in days_l]
+    type_of_filter_l = ['month', 'day', 'not at all']
+    type_of_filter_s = [item[0].lower() for item in type_of_filter_l]
 
     month = 'all'
     day = 'all'
@@ -58,11 +58,11 @@ def get_filters():
     while True:
         city = input('Would you like to see data for Chicago ({0}c{1}), New York City ({0}n{1}) or Washington ({0}w{1})? '.format(color.BU, color.END))
 
-        if city.title() in cities_long:
+        if city.title() in cities_l:
             print('Thank you for your input! You have chosen: {}'.format(color.BLUE_BOLD + city.title() + color.END), '\n')
             break
-        elif city.lower() in cities_short:
-            city = cities_long[cities_short.index(city.lower())]
+        elif city.lower() in cities_s:
+            city = cities_l[cities_s.index(city.lower())]
             print('Thank you for your input! You have chosen: {}'.format(color.BLUE_BOLD + city + color.END), '\n')
             break
         else:
@@ -71,7 +71,7 @@ def get_filters():
     # setting the filter type: monthly, dayly, or not at all?
     while True:
         type_of_time_filter = input('Would you like to filter the data by month ({0}m{1}), day ({0}d{1}), or not at all ({0}n){1}? '.format(color.BU, color.END))
-        if type_of_time_filter.lower() in type_of_filter_short or type_of_time_filter.lower() in type_of_filter_long:
+        if type_of_time_filter.lower() in type_of_filter_s or type_of_time_filter.lower() in type_of_filter_l:
             break
         else:
             print('That\'s not a valid input!')
@@ -80,11 +80,11 @@ def get_filters():
     if type_of_time_filter.lower() == 'm' or type_of_time_filter.lower() == 'month':
         while True:
             month = input('Which month - January ({0}jan{1}), February ({0}feb{1}), March ({0}mar{1}), April ({0}apr{1}), May ({0}may{1}), or June ({0}jun{1}) or each month ({0}em{1})? '.format(color.BU, color.END))
-            if month.title() in months_long:
+            if month.title() in months_l:
                 print('Thank you for your input! You have chosen: {}'.format(color.BLUE_BOLD + month.title() + color.END), '\n')
                 break
-            elif month.lower() in months_short:
-                month = months_long[months_short.index(month.lower())]
+            elif month.lower() in months_s:
+                month = months_l[months_s.index(month.lower())]
                 print('Thank you for your input! You have chosen: {}'.format(color.BLUE_BOLD + month + color.END), '\n')
                 break
             elif month.lower() == 'em' or month.lower() == 'each month':
@@ -98,11 +98,11 @@ def get_filters():
     if type_of_time_filter.lower() == 'd' or type_of_time_filter.lower() == 'day':
         while True:
             day = input('Which day - Monday ({0}mo{1}), Tuesday ({0}tu{1}), Wednesday ({0}we{1}), Thursday ({0}th{1}), Friday ({0}fr{1}), Saturday ({0}sa{1}), or Sunday ({0}su{1}) or each day ({0}ed{1})? '.format(color.BU, color.END))
-            if day.title() in days_long:
+            if day.title() in days_l:
                 print('Thank you for your input! You have chosen: {}'.format(color.BLUE_BOLD +  day.title()), '\n' + color.END)
                 break
-            elif day.lower() in days_short:
-                day = days_long[days_short.index(day.lower())]
+            elif day.lower() in days_s:
+                day = days_l[days_s.index(day.lower())]
                 print('Thank you for your input! You have chosen: {}'.format(color.BLUE_BOLD + day + color.END), '\n')
                 break
             elif day.lower() == 'ed' or day.lower() == 'each day':
@@ -164,8 +164,8 @@ def set_dataframe(df, month, day):
     day_copy = day
     if month != 'all':
         # use the index of the months list to get the corresponding int
-        month_copy = months_long.index(month_copy.title()) + 1
-        print('Month: {0}{2}{1}'.format(color.PURPLE, color.END, months_long[month_copy - 1]))
+        month_copy = months_l.index(month_copy.title()) + 1
+        print('Month: {0}{2}{1}'.format(color.PURPLE, color.END, months_l[month_copy - 1]))
 
         # filter by month to create the new dataframe
         df_copy = df_copy[df_copy['month'] == month_copy]
@@ -184,7 +184,7 @@ def time_stats(df, month, day):
     """Displays statistics on the most frequent times of travel."""
     # display the most common month
     if month == 'all':
-        popular_month = months_long[df['month'].mode()[0] - 1]
+        popular_month = months_l[df['month'].mode()[0] - 1]
         rents_in_total_month = df['month'].value_counts().max()
         print('The most common month is: {0}{2}{1} with {0}{3}{1} rents in total'.format(color.BLUE_BOLD, color.END, popular_month, rents_in_total_month))
 
@@ -296,9 +296,9 @@ def main_routine(df, month, day, set_list):
     """
     print('\n{}Calculating The Most Frequent Times of Travel...{}\n'.format(color.BOLD, color.END))
     for x in set_list:
-        if set_list == months_long:
+        if set_list == months_l:
             month = x
-        if set_list == days_long:
+        if set_list == days_l:
             day = x
         df_set, month_set, day_set = set_dataframe(df, month, day)
         start_time = timer_start()
@@ -307,9 +307,9 @@ def main_routine(df, month, day, set_list):
 
     print('\n{}Calculating The Most Popular Stations and Trip...{}\n'.format(color.BOLD, color.END))
     for x in set_list:
-        if set_list == months_long:
+        if set_list == months_l:
             month = x
-        if set_list == days_long:
+        if set_list == days_l:
             day = x
         df_set, month_set, day_set = set_dataframe(df, month, day)
         start_time = timer_start()
@@ -318,9 +318,9 @@ def main_routine(df, month, day, set_list):
 
     print('\n{}Calculating Trip Duration...{}\n'.format(color.BOLD, color.END))
     for x in set_list:
-        if set_list == months_long:
+        if set_list == months_l:
             month = x
-        if set_list == days_long:
+        if set_list == days_l:
             day = x
         df_set, month_set, day_set = set_dataframe(df, month, day)
         start_time = timer_start()
@@ -329,9 +329,9 @@ def main_routine(df, month, day, set_list):
 
     print('\n{}Calculating User Stats...{}\n'.format(color.BOLD, color.END))
     for x in set_list:
-        if set_list == months_long:
+        if set_list == months_l:
             month = x
-        if set_list == days_long:
+        if set_list == days_l:
             day = x
         df_set, month_set, day_set = set_dataframe(df, month, day)
         start_time = timer_start()
@@ -377,14 +377,14 @@ def main():
             set_list = ['']
 
         elif month == 'each_month':
-            set_list = months_long
+            set_list = months_l
 
         elif day == 'each_day':
-            set_list = days_long
+            set_list = days_l
 
         # jump to main routine. Further program progrssion is determined by the filter mode.
-        # "each_month" for month = 'each_month' --> set_list = months_long
-        # "each_day" for day = 'each day' --> set_list = days_long
+        # "each_month" for month = 'each_month' --> set_list = months_l
+        # "each_day" for day = 'each day' --> set_list = days_l
         # certain day --> set_list = ['']
         # "all" --> set_list = ['']
         main_routine(df, month, day, set_list)
