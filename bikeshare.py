@@ -294,49 +294,30 @@ def main_routine(df, month, day, set_list):
         The actual dataframe is stored in df_set. This data_frame will be passed to the statistics function (time_stats(...), station_stats(...), etc. )for further calculations.
         For each statistics section the timer functions timer_start() and timer_end(start_time) will be called tto measure the calculation duration.
     """
-    print('\n{}Calculating The Most Frequent Times of Travel...{}\n'.format(color.BOLD, color.END))
-    for x in set_list:
-        if set_list == months_l:
-            month = x
-        if set_list == days_l:
-            day = x
-        df_set, month_set, day_set = set_dataframe(df, month, day)
-        start_time = timer_start()
-        time_stats(df_set, month_set, day_set)
-        timer_end(start_time)
+    messages = ['\n{}Calculating The Most Frequent Times of Travel...{}\n'.format(color.BOLD, color.END),
+                '\n{}Calculating The Most Popular Stations and Trip...{}\n'.format(color.BOLD, color.END),
+                '\n{}Calculating Trip Duration...{}\n'.format(color.BOLD, color.END),
+                '\n{}Calculating User Stats...{}\n'.format(color.BOLD, color.END)
+                ]
 
-    print('\n{}Calculating The Most Popular Stations and Trip...{}\n'.format(color.BOLD, color.END))
-    for x in set_list:
-        if set_list == months_l:
-            month = x
-        if set_list == days_l:
-            day = x
-        df_set, month_set, day_set = set_dataframe(df, month, day)
-        start_time = timer_start()
-        station_stats(df_set)
-        timer_end(start_time)
-
-    print('\n{}Calculating Trip Duration...{}\n'.format(color.BOLD, color.END))
-    for x in set_list:
-        if set_list == months_l:
-            month = x
-        if set_list == days_l:
-            day = x
-        df_set, month_set, day_set = set_dataframe(df, month, day)
-        start_time = timer_start()
-        trip_duration_stats(df_set)
-        timer_end(start_time)
-
-    print('\n{}Calculating User Stats...{}\n'.format(color.BOLD, color.END))
-    for x in set_list:
-        if set_list == months_l:
-            month = x
-        if set_list == days_l:
-            day = x
-        df_set, month_set, day_set = set_dataframe(df, month, day)
-        start_time = timer_start()
-        user_stats(df_set)
-        timer_end(start_time)
+    for index in range(4):
+        print(messages[index])
+        for x in set_list:
+            if set_list == months_l:
+                month = x
+            if set_list == days_l:
+                day = x
+            df_set, month_set, day_set = set_dataframe(df, month, day)
+            start_time = timer_start()
+            if index == 0:
+                time_stats(df_set, month_set, day_set)
+            elif index == 1:
+                station_stats(df_set)
+            elif index == 2:
+                trip_duration_stats(df_set)
+            elif index == 3:
+                user_stats(df_set)
+            timer_end(start_time)
 
     display_data(df)
 
