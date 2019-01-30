@@ -60,7 +60,11 @@ https://riptutorial.com/pandas/example/21739/get-the-first-last-n-rows-of-a-data
 * Using [pandas.DataFrame.iloc](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.iloc.html)
 
 ### Credits
-Style of README.md was inspired by [AudioKit](https://github.com/AudioKit/AudioKit)
+README.md was inspired by
+* [Markdown Guide from GitHub](https://guides.github.com/features/mastering-markdown/)
+* [Markdown Quick Reference](https://en.support.wordpress.com/markdown-quick-reference/)
+* [Markdown CheatSheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
+* [AudioKit](https://github.com/AudioKit/AudioKit)
 
 ### Footnotes
 <a id="note1" href="#note1ref"><sup>1</sup></a>These files are  provided by Udacity and are not the subject of this project.
